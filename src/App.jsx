@@ -2,6 +2,9 @@ import { initializeApp } from "firebase/app";
 import { collection, getFirestore, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
 import { useEffect, useState } from "react"
 
+import "./App.css"
+
+//Conexao Banco de dados
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyCzWFls49ncmBVKD8XSNfNdJ9tDr41fL2w",
   authDomain: "react-firebase-dba81.firebaseapp.com",
@@ -14,8 +17,8 @@ function App() {
   const [email, setEmail] = useState("");
   const [users, setUsers] = useState([]);
 
+  //Conexao Banco de dados
   const db = getFirestore(firebaseApp);
-
   const userCollectionRef = collection(db, "users")
 
   // Adicionar novo user no BD
@@ -43,16 +46,23 @@ function App() {
   }
 
   return (
-    <div>
-      <input type="text" placeholder="Nome" value={name} onChange={(e) => setName(e.target.value)} />
-      <input type="text" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <button onClick={criarUser}>Criar Users</button>
+    <div className="container">
+      <h1>CRUD FIREBASE + REACT </h1>
+      <input className="input" type="text"
+        placeholder="Nome"
+        value={name}
+        onChange={(e) => setName(e.target.value)} />
+      <input className="input" type="text"
+        placeholder="E-mail"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)} />
+      <button className="btn" onClick={criarUser}>Criar Users</button>
       <ul>
         {users.map((user) => {
           return (
-            <div key={user.id}>
+            <div className="Usuarios" key={user.id}>
               <li>{user.name} | {user.email}</li>
-              <button onClick={() => deleteUser(user.id)}>Deletar</button>
+              <button className="btnDeletar"onClick={() => deleteUser(user.id)}>Deletar</button>
             </div>
           )
         })

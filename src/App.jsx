@@ -22,15 +22,15 @@ function App() {
   const [valor, setValor] = useState("");
   const [users, setUsers] = useState([]);
   const [forceUpdate, setForceUpdate] = useState(false);
-  const [searchType, setSearchType] = useState(""); // Novo estado para armazenar o tipo de busca
+  const [searchTerm, setSearchTerm] = useState(""); // Novo estado para armazenar o tipo de busca
   const [searchResults, setSearchResults] = useState([]); // Novo estado para armazenar os resultados da busca
 
   // Função para buscar usuários pelo tipo
   const searchByType = () => {
     const results = users.filter(
       (user) =>
-        user.tipo.toLowerCase() === searchType.toLowerCase() ||
-        user.name.toLowerCase() === searchType.toLowerCase()
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.tipo.toLowerCase().includes(searchTerm.toLowerCase())
 
     );
     setSearchResults(results);
@@ -127,8 +127,8 @@ function App() {
           className="input"
           type="text"
           placeholder="Buscar por Tipo"
-          value={searchType}
-          onChange={(e) => setSearchType(e.target.value)} />
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)} />
         <button className="btn" onClick={searchByType}>
           <img className="lupa" src={busca} alt="Lupa" />
         </button>
@@ -136,7 +136,7 @@ function App() {
 
       <div>
         {/* Mostra os resultados da busca ou todos os usuários se não houver busca */}
-        {(searchType ? searchResults : users).map((user) => (
+        {(searchTerm ? searchResults : users).map((user) => (
           <div className="Usuarios" key={user.id}>
             <div className="Card">
               <span>Nome: {user.name}</span>

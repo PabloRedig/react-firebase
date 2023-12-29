@@ -3,6 +3,7 @@ import { collection, getFirestore, getDocs, addDoc, doc, deleteDoc } from "fireb
 import { useEffect, useState } from "react"
 
 import DeleteIcon from "./Imgs/Delete.png"
+import busca from "./Imgs/busca.png"
 
 import "./App.css"
 
@@ -21,6 +22,19 @@ function App() {
   const [valor, setValor] = useState("");
   const [users, setUsers] = useState([]);
   const [forceUpdate, setForceUpdate] = useState(false);
+  const [searchType, setSearchType] = useState(""); // Novo estado para armazenar o tipo de busca
+  const [searchResults, setSearchResults] = useState([]); // Novo estado para armazenar os resultados da busca
+
+  // Função para buscar usuários pelo tipo
+  const searchByType = () => {
+    const results = users.filter(
+      (user) =>
+        user.tipo.toLowerCase() === searchType.toLowerCase() ||
+        user.name.toLowerCase() === searchType.toLowerCase()
+
+    );
+    setSearchResults(results);
+  };
 
   //Conexao Banco de dados
   const db = getFirestore(firebaseApp);
@@ -103,33 +117,41 @@ function App() {
           value={valor}
           onChange={(e) => setValor(e.target.value)} />
 
-        <button className="btn" onClick={criarUser}>Criar</button>
+        <button onClick={criarUser}>Criar</button>
       </div>
-      
+
       <h1>Estoque</h1>
 
-      <div>
-        
+      <div className="FiltroDeBusca">
+        <input
+          className="input"
+          type="text"
+          placeholder="Buscar por Tipo"
+          value={searchType}
+          onChange={(e) => setSearchType(e.target.value)} />
+        <button className="btn" onClick={searchByType}>
+          <img className="lupa" src={busca} alt="Lupa" />
+        </button>
+      </div>
 
-        {users.map((user) => {
-          return (
-            <div className="Usuarios" key={user.id}>
-              <div className="Card">
-                <span>Nome: {user.name}</span>
-                <span>Quantidade: {user.quantidade}</span>
-                <span>Tipo: {user.tipo}</span>
-                <span>Valor: R${user.valor}</span>
-                <button className="btnDeletar" onClick={() => deleteUser(user.id)}> Deletar </button>
-              </div>
+      <div>
+        {/* Mostra os resultados da busca ou todos os usuários se não houver busca */}
+        {(searchType ? searchResults : users).map((user) => (
+          <div className="Usuarios" key={user.id}>
+            <div className="Card">
+              <span>Nome: {user.name}</span>
+              <span>Quantidade: {user.quantidade}</span>
+              <span>Tipo: {user.tipo}</span>
+              <span>Valor: R${user.valor}</span>
+              <button className="btnDeletar" onClick={() => deleteUser(user.id)}> Deletar </button>
             </div>
-          )
-        })
-        }
+          </div>
+        ))}
       </div>
     </div>
-
-
   );
 }
 
 export default App;
+
+

@@ -20,6 +20,7 @@ function App() {
   const [tipo, setTipo] = useState("");
   const [valor, setValor] = useState("");
   const [users, setUsers] = useState([]);
+  const [forceUpdate, setForceUpdate] = useState(false);
 
   //Conexao Banco de dados
   const db = getFirestore(firebaseApp);
@@ -32,7 +33,13 @@ function App() {
       quantidade,
       tipo,
       valor,
-    })
+    });
+    setForceUpdate((prev) => !prev)
+
+    setName("");
+    setQuantidade("");
+    setTipo("");
+    setValor("");
   }
 
   // Visualizar user no BD 
@@ -43,12 +50,14 @@ function App() {
     };
     getUsers();
 
-  }, [])
+  }, [forceUpdate]);
 
   //Deletar User no BD
   async function deleteUser(id) {
     const userDoc = doc(db, "users", id);
     await deleteDoc(userDoc);
+
+    setForceUpdate((prev) => !prev);
   }
 
   return (
@@ -82,7 +91,7 @@ function App() {
 
         <button className="btn" onClick={criarUser}>Criar Users</button>
       </div>
-      
+
       <div>
         {users.map((user) => {
           return (

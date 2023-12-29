@@ -28,6 +28,13 @@ function App() {
 
   // Adicionar novo user no BD
   async function criarUser() {
+
+    if (!name || !quantidade || !tipo || !valor) {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    
     const user = await addDoc(userCollectionRef, {
       name,
       quantidade,
@@ -89,9 +96,9 @@ function App() {
           value={valor}
           onChange={(e) => setValor(e.target.value)} />
 
-        <button className="btn" onClick={criarUser}>Criar Users</button>
+        <button className="btn" onClick={criarUser}>Criar</button>
       </div>
-
+    <h1>Estoque</h1>
       <div>
         {users.map((user) => {
           return (

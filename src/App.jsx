@@ -34,7 +34,6 @@ function App() {
       return;
     }
 
-    
     const user = await addDoc(userCollectionRef, {
       name,
       quantidade,
@@ -61,6 +60,14 @@ function App() {
 
   //Deletar User no BD
   async function deleteUser(id) {
+
+    const confirmDelete = window.confirm("Tem certeza que deseja excluir este usuário?");
+
+    // Se o usuário clicar em "Cancelar", sai da função sem excluir o usuário
+    if (!confirmDelete) {
+      return;
+    }
+
     const userDoc = doc(db, "users", id);
     await deleteDoc(userDoc);
 
@@ -98,8 +105,12 @@ function App() {
 
         <button className="btn" onClick={criarUser}>Criar</button>
       </div>
-    <h1>Estoque</h1>
+      
+      <h1>Estoque</h1>
+
       <div>
+        
+
         {users.map((user) => {
           return (
             <div className="Usuarios" key={user.id}>
@@ -107,7 +118,7 @@ function App() {
                 <span>Nome: {user.name}</span>
                 <span>Quantidade: {user.quantidade}</span>
                 <span>Tipo: {user.tipo}</span>
-                <span>Valor: {user.valor}</span>
+                <span>Valor: R${user.valor}</span>
                 <button className="btnDeletar" onClick={() => deleteUser(user.id)}> Deletar </button>
               </div>
             </div>

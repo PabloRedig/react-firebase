@@ -1,8 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Libre+Baskerville&family=Montserrat:wght@300;500;700&family=Open+Sans:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-top: 20px;
 }
 
 .inputs {
@@ -20,7 +29,7 @@
     background-color: #e3e2e262;
 }
 
-.inputs input{
+.inputs input {
     width: 200px;
     height: 30px;
     margin: 5px;
@@ -29,33 +38,23 @@
     border: none;
 }
 
-.FiltroDeBusca{
+.FiltroDeBusca {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.FiltroDeBusca input{
+.FiltroDeBusca input {
     width: 200px;
     height: 30px;
     margin: 5px;
 
     border-radius: .30em;
-   border: 1px solid black;
+    border: 1px solid black;
 }
 
-.btn{
-    width: 40px;
-    height: 30px;
-}
-
-.lupa {
-    width: 100%;
-}
-
-
-button{
-    width: 100px;
+button {
+    width: 200px;
     height: 30px;
     margin: 15px;
 
@@ -63,27 +62,87 @@ button{
 
     border-radius: .50em;
     border: none;
-    background-color: rgba(128, 128, 128, 0.482) ;
+    background-color: rgba(128, 128, 128, 0.482);
+}
+
+.btn{
+    width: 55px;
+    height: 30px;
 }
 
 .Card {
     width: 250px;
     height: auto;
     margin: 1em auto;
-    padding: 15px 10px 5px; 
+    padding: 0px 10px ;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 9px;
-    
+    justify-content: flex-start;
+    gap: 5px;
 
     border-radius: .50em;
     background-color: #e3e2e262;
 }
 
-.Card span{
+.Card span {
     font-size: 18px;
+
+}
+
+.EditUserForm {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.EditUserForm input {
+    width: 200px;
+    height: 30px;
+    margin: 5px;
+
+    border-radius: .30em;
+    border: none;
+}
+
+.Cancelar {
+    width: 200px;
+
+    color: white;
+    background-color: rgb(252, 56, 56);
+}
+
+.Salvar {
+    width: 200px;
+}
+
+.produto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Acoes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 700px) { 
    
+    .container{
+        flex-direction: column;
+        justify-content: flex-start;    
+    }
+
+    .inputs{
+        margin: 0 30px;
+    }
+    .produtos{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
 }

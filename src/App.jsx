@@ -28,23 +28,30 @@ function EditUserForm({ user, onSave, onCancel }) {
   };
 
   return (
-    <div className="EditUserForm">
-      <h2>Editar Produto</h2>
-      <label>Nome:</label>
-      <input type="text" value={editedName} onChange={(e) => setEditedName(e.target.value)} />
+    <>
+      {/* MODAL PARA EDITAR O PROTUDO */}
 
-      <label>Quantidade:</label>
-      <input type="text" value={editedQuantidade} onChange={(e) => setEditedQuantidade(e.target.value)} />
+      <div className="EditUserForm">
+        <h2>Editar Produto</h2>
+        <label><strong>Nome</strong></label>
+        <input className="input" type="text" value={editedName} onChange={(e) => setEditedName(e.target.value)} />
 
-      <label>Tipo:</label>
-      <input type="text" value={editedTipo} onChange={(e) => setEditedTipo(e.target.value)} />
+        <label><strong>Quantidade</strong></label>
+        <input className="input" type="text" value={editedQuantidade} onChange={(e) => setEditedQuantidade(e.target.value)} />
 
-      <label>Valor:</label>
-      <input type="text" value={editedValor} onChange={(e) => setEditedValor(e.target.value)} />
+        <label><strong>Tipo</strong></label>
+        <input className="input" type="text" value={editedTipo} onChange={(e) => setEditedTipo(e.target.value)} />
 
-      <button className="btn Salvar" onClick={handleSave}>Salvar</button>
-      <button className="btn Cancelar" onClick={onCancel}>Cancelar</button>
-    </div>
+        <label><strong>Valor</strong></label>
+        <input className="input" type="text" value={editedValor} onChange={(e) => setEditedValor(e.target.value)} />
+
+        <div className="acoes">
+          <button className="btn Green" onClick={handleSave}>Salvar</button>
+          <button className="btn Red" onClick={onCancel}>Cancelar</button>
+        </div>
+      </div>
+    </>
+
   );
 }
 
@@ -157,7 +164,7 @@ function App() {
 
   return (
     <div className="container">
-      <div className="inputs">
+      <div className="Box_InserirDados">
         <h1>Insira os dados</h1>
 
         {/** Nome */}
@@ -184,12 +191,11 @@ function App() {
           value={valor}
           onChange={(e) => setValor(e.target.value)} />
 
-        <button onClick={criarUser}>Adicionar Produto</button>
+        <button className="btn" onClick={criarUser}>Adicionar Produto</button>
       </div>
 
-      <h1>Estoque</h1>
-
       <div className="FiltroDeBusca">
+        <h1>Estoque</h1>
         <input
           className="input"
           type="text"
@@ -201,27 +207,28 @@ function App() {
           Buscar
         </button>
       </div>
+      <div className="Box_Produto">
+        {(searchTerm ? searchResults : users).map((user) => (
+          <div key={user.id}>
+            <div className="Card">
+              <h2>Produto</h2>
+              <div className="produto">
+                <span><strong>NOME:</strong> {user.name}</span>
+                <span><strong>QUANTIDADE:</strong> {user.quantidade}</span>
+                <span><strong>TIPO:</strong> {user.tipo}</span>
+                <span><strong>VALOR:</strong> R${user.valor}</span>
+              </div>
 
-
-      {(searchTerm ? searchResults : users).map((user) => (
-        <div className="produtos" key={user.id}>
-          <div className="Card">
-            <h2>Produto</h2>
-            <div className="produto">
-              <span><strong>NOME:</strong> {user.name}</span>
-              <span><strong>QUANTIDADE:</strong> {user.quantidade}</span>
-              <span><strong>TIPO:</strong> {user.tipo}</span>
-              <span><strong>VALOR:</strong> R${user.valor}</span>
-            </div>           
-
-              <button  onClick={() => deleteUser(user.id)}>
-                Deletar
-              </button>
-
-              {/* Botão de Editar */}
-              <button onClick={() => startEdit(user)}>
-                Editar
-              </button>
+              <div className="acoes">
+                {/* Botão de Editar */}
+                <button className="btn" onClick={() => startEdit(user)}>
+                  Editar
+                </button>
+                {/* Botão Deletar */}
+                <button className="btn Red" onClick={() => deleteUser(user.id)}>
+                  Deletar
+                </button>
+              </div>
 
               {/* Botões de Salvar e Cancelar (somente visíveis durante a edição) */}
               {editUserId === user.id && (
@@ -234,12 +241,11 @@ function App() {
                   onCancel={cancelEdit}
                 />
               )}
-
-
             </div>
           </div>
-        
+
       ))}
+      </div>
     </div>
 
   );

@@ -7,142 +7,125 @@
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 20px;
-}
-
-.inputs {
-    width: 250px;
+    width: 97vw;
     height: auto;
-    margin: 1em auto;
-    padding: 5px 10px;
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 10px;
 
-    border-radius: .50em;
-    background-color: #e3e2e262;
 }
 
-.inputs input {
+.Box_InserirDados {
+    width: 260px;
+    height: auto;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+    border-radius: .50em;
+
+    background-color: #e9e5e5;
+}
+
+.Box_InserirDados button{
+    margin-bottom: 10px;
+}
+.input {
     width: 200px;
     height: 30px;
-    margin: 5px;
+    margin: 5px auto;
 
-    border-radius: .30em;
     border: none;
+    border-radius: .50em;
 }
 
 .FiltroDeBusca {
+    width: 260px;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: .50em;
+    background-color: #e9e5e5;
+}
+
+.FiltroDeBusca button{
+    margin-bottom: 10px;
+}
+
+.Box_Produto {
+    width: 100vw;
+
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.FiltroDeBusca input {
-    width: 200px;
-    height: 30px;
-    margin: 5px;
-
-    border-radius: .30em;
-    border: 1px solid black;
-}
-
-button {
-    width: 200px;
-    height: 30px;
-    margin: 15px;
-
-    font-size: 15px;
-
-    border-radius: .50em;
-    border: none;
-    background-color: rgba(128, 128, 128, 0.482);
-}
-
-.btn{
-    width: 55px;
-    height: 30px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 20px;
 }
 
 .Card {
     width: 250px;
     height: auto;
-    margin: 1em auto;
-    padding: 0px 10px ;
+    margin: auto;
+    padding: 5px;
 
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 5px;
+    gap: 10px;
 
     border-radius: .50em;
-    background-color: #e3e2e262;
+
+    background-color: #e9e5e5;
 }
 
-.Card span {
-    font-size: 18px;
+.Card h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.produto {
+    display: flex;
+    flex-direction: column;
+}
+
+.acoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 
 .EditUserForm {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    gap: 5px;
 }
 
-.EditUserForm input {
-    width: 200px;
-    height: 30px;
-    margin: 5px;
-
-    border-radius: .30em;
+.btn {
     border: none;
-}
-
-.Cancelar {
-    width: 200px;
-
+    border-radius: .50em;
+    padding: 5px;
+    background-color: rgba(128, 128, 128, 0.767);
     color: white;
-    background-color: rgb(252, 56, 56);
 }
 
-.Salvar {
-    width: 200px;
+.Red {
+    background-color: rgba(255, 0, 0, 0.774);
 }
 
-.produto{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.Acoes{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@media (min-width: 700px) { 
-   
-    .container{
-        flex-direction: column;
-        justify-content: flex-start;    
-    }
-
-    .inputs{
-        margin: 0 30px;
-    }
-    .produtos{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
+.Green {
+    background-color: green;
 }

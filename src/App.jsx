@@ -3,6 +3,9 @@ import { collection, getFirestore, getDocs, addDoc, doc, deleteDoc, updateDoc } 
 import { useEffect, useState } from "react";
 
 import "./App.css";
+import Inserir from "./Modulos/InserirDados";
+import FiltroDeBusca from "./Modulos/FiltroDeBusca";
+import Card from "./Modulos/Card";
 
 //Conexao Banco de dados
 const firebaseApp = initializeApp({
@@ -164,87 +167,38 @@ function App() {
 
   return (
     <div className="container">
-      <div className="Box_InserirDados">
-        <h1>Insira os dados</h1>
+      <Inserir
+        name={name}
+        setName={setName}
+        tipo={tipo}
+        setTipo={setTipo}
+        quantidade={quantidade}
+        setQuantidade={setQuantidade}
+        valor={valor}
+        setValor={setValor}
+        onClick={criarUser}
+      />
 
-        {/** Nome */}
-        <input className="input" type="text"
-          placeholder="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)} />
+      <FiltroDeBusca
+        busca={searchTerm}
+        setBusca={setSearchTerm}
+        onclick={searchByType}
+      />
 
-        {/** Quantiade */}
-        <input className="input" type="text"
-          placeholder="Quantidade"
-          value={quantidade}
-          onChange={(e) => setQuantidade(e.target.value)} />
-
-        {/** Tipo */}
-        <input className="input" type="text"
-          placeholder="Tipo"
-          value={tipo}
-          onChange={(e) => setTipo(e.target.value)} />
-
-        {/** Valor */}
-        <input className="input" type="text"
-          placeholder="Valor"
-          value={valor}
-          onChange={(e) => setValor(e.target.value)} />
-
-        <button className="btn" onClick={criarUser}>Adicionar Produto</button>
-      </div>
-
-      <div className="FiltroDeBusca">
-        <h1>Estoque</h1>
-        <input
-          className="input"
-          type="text"
-          placeholder="Buscar"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button className="btn" onClick={searchByType}>
-          Buscar
-        </button>
-      </div>
       <div className="Box_Produto">
         {(searchTerm ? searchResults : users).map((user) => (
           <div key={user.id}>
-            <div className="Card">
-              <h2>Produto</h2>
-              <div className="produto">
-                <span><strong>NOME:</strong> {user.name}</span>
-                <span><strong>QUANTIDADE:</strong> {user.quantidade}</span>
-                <span><strong>TIPO:</strong> {user.tipo}</span>
-                <span><strong>VALOR:</strong> R${user.valor}</span>
-              </div>
-
-              <div className="acoes">
-                {/* Botão de Editar */}
-                <button className="btn" onClick={() => startEdit(user)}>
-                  Editar
-                </button>
-                {/* Botão Deletar */}
-                <button className="btn Red" onClick={() => deleteUser(user.id)}>
-                  Deletar
-                </button>
-              </div>
-
-              {/* Botões de Salvar e Cancelar (somente visíveis durante a edição) */}
-              {editUserId === user.id && (
-                <EditUserForm
-                  user={user}
-                  onSave={(editedUser) => {
-                    saveEdit(editedUser);
-                    cancelEdit();
-                  }}
-                  onCancel={cancelEdit}
-                />
-              )}
-            </div>
+            <Card 
+              name={user.name}
+              quantidade={user.quantidade}
+              tipo={user.tipo}
+              valor={user.valor}
+              startEdit={startEdit}
+              user={user}
+              deleteUser={deleteUser}      
+            />
           </div>
-
-      ))}
+        ))}
       </div>
     </div>
 

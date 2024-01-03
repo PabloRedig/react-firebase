@@ -18,23 +18,6 @@
 
 }
 
-.Box_InserirDados {
-    width: 260px;
-    height: auto;
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    
-    border-radius: .50em;
-
-    background-color: #e9e5e5;
-}
-
-.Box_InserirDados button{
-    margin-bottom: 10px;
-}
 .input {
     width: 200px;
     height: 30px;
